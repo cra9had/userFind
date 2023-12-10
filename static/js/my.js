@@ -1,5 +1,10 @@
-const API_URL = "http://127.0.0.1:8000/api/"
+var API_URL = 'http://191.96.53.250/api/';
 
+// Check if the environment is local (you can adjust this condition based on your setup)
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    // Override API URL for local development
+    API_URL = 'http://localhost:8000/api/';  // Change this to your local server URL
+}
 
 document.addEventListener('DOMContentLoaded', async function () {
     const userData = await getUserInfo()
