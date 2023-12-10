@@ -1,0 +1,86 @@
+.user-settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.user-photo-container {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.user-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.password-fields {
+    text-align: center;
+}
+
+input[type=password] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    background-color: #222;
+    color: #bbbbbb;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+}
+
+input[type=password]:focus {
+    color: white;
+    background-color: #222;
+}
+
+
+.change-pw-label {
+    color: #bbbbbb;
+    font-size: 20px;
+}
+
+#saveSettings {
+    background-color: #bbbbbb;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+#file-upload .btn:focus {
+    background-color: #bbbbbb;
+}
+
+.file-upload .btn {
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-bottom: 2rem;
+    background-color: #bbbbbb;
+}
+
+@media (max-width: 576px) {
+    /* Small devices (576px and below) */
+    .user-settings-container {
+        margin-top: 40px; /* Adjust margin as needed for spacing */
+    }
+
+    .user-photo-container {
+        width: 300px; /* Adjust width as needed for the user photo */
+        height: 300px; /* Adjust height as needed for the user photo */
+    }
+    .password-fields {
+        width: 80%;
+    }
+}
