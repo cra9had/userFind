@@ -107,7 +107,6 @@
         <div class="lightsaber ls-left ls-green"></div>
         <div class="lightsaber ls-right ls-red"></div>
     </div>
-
     <!-- Main Content Container -->
     <section id="main-section" class="main-section" style="display: none">
         <div class="container">
@@ -157,6 +156,7 @@
             <span class="glitch" id="personNotFound" style="display: none" data-text="Ничего не найдено">Ничего не найдено</span>
         </div>
     </section>
+
     <div id="searching-loader" style="display: none">
         <div id="spinner"></div>
         <div id="edge">
@@ -166,12 +166,13 @@
             </svg>
         </div>
     </div>
-
-    <footer class="footer">
+    <div class="wrapper">
+    <footer class="footer" id="footer">
         <div class="container">
             <p>&copy; 2023 FindPerson. All rights reserved.</p>
         </div>
     </footer>
+    </div>
     <script src="{% static 'js/home.js' %}" type="module" defer></script>
     <script src="{% static 'js/phoneinput.js' %}" defer></script>
     <script src="{% static 'js/common.js' %}" defer></script>

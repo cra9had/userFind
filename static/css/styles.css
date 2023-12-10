@@ -21,12 +21,12 @@ body {
 .main-section {
     /*margin: 20px;*/
     padding: 20px;
+    height: 90vh;
 }
 
 .footer {
     background-color: #16161691;
     color: #bbbbbb;
-    position: fixed;
     bottom: 0;
     width: 100%;
 }
