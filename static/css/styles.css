@@ -3,6 +3,7 @@ body {
     background-color: #1b1b1e;
     margin: 0;
     padding: 0;
+    height: 100%
 }
 
 .header, .main-section, .footer {
@@ -21,7 +22,10 @@ body {
 .main-section {
     /*margin: 20px;*/
     padding: 20px;
-    height: 90vh;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
 }
 
 .footer {
