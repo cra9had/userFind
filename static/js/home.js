@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     loginBtn.addEventListener('click', function () {
         if (!isLoginPopupOpen && !isRegisterPopupOpen) {
+            document.getElementById("navbarNav").classList.remove("show")
             getCaptcha("LoginCaptchaContainer")
             loginPopup.style.display = 'block';
             isLoginPopupOpen = true;
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     registerBtn.addEventListener('click', function () {
         if (!isLoginPopupOpen && !isRegisterPopupOpen) {
             getCaptcha("RegisterCaptchaContainer")
+            document.getElementById("navbarNav").classList.remove("show")
             registerPopup.style.display = 'block';
             isRegisterPopupOpen = true;
         }
