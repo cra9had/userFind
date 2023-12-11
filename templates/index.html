@@ -56,7 +56,7 @@
             </form>
         </div>
     </div>
-
+<div class="wrapper">
     <nav id="header-section" class="navbar navbar-expand-lg navbar-dark bg-dark" style="display: none">
         <a class="navbar-brand" href="#">FindPerson</a>
         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,19 +72,16 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto" id="userProfileMenu">
-            <!-- Check if user is logged in -->
             <li class="nav-item" id="userProfile">
-                <!-- Avatar image -->
                 <div class="dropdown profile-context-menu" style="display: flex">
                     <div class="user-avatar-mini-container">
                         <img src="/media/profiles/default.png" alt="User Avatar" class="rounded-circle avatar-img overflow-hidden" id="avatarImg">
                     </div>
                     <a class="nav-link dropdown-toggle" href="#" role="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Username <!-- Replace with the actual username -->
+                        Username
                     </a>
 
                     <div class="dropdown-menu profile-menu" aria-labelledby="userDropdown">
-                        <!-- Add context menu items here -->
                         <a class="dropdown-item profile" href="my/">Профиль</a>
                         <a class="dropdown-item" href="#">Settings</a>
                         <span class="dropdown-item user-balance">Баланс: <span id="user-balance-amount">0</span>₽</span>
@@ -143,15 +140,20 @@
                 </form>
             </div>
             <div class="userInfo" id="userInfo" style="display: none">
-                <div class="person-info">ФИО: <span id="fullname"></span></div>
-                <div class="person-info">Номер телефона: <span id="phone_number"></span></div>
-                <div class="person-info">Дата рождения: <span id="birthday"></span></div>
-                <div class="person-info">Почта: <span id="email"></span></div>
-                <div class="person-info">Паспорт: <span id="passport"></span></div>
-                <div class="person-info">Возможные адреса: <span id="possibles_addresses"></span></div>
-                <div class="person-info">Водителькие права: <span id="driver_license"></span></div>
-                <div class="person-info">СНИЛС: <span id="insurance"></span></div>
-                <div class="person-info">ИНН: <span id="inn"></span></div>
+                <div>
+                    <div class="person-info">ФИО: <span id="fullname"></span></div>
+                    <div class="person-info">Номер телефона: <span id="phone_number"></span></div>
+                    <div class="person-info">Дата рождения: <span id="birthday"></span></div>
+                    <div class="person-info">Почта: <span id="email"></span></div>
+                    <div class="person-info">Паспорт: <span id="passport"></span></div>
+                    <div class="person-info">Возможные адреса: <span id="possibles_addresses"></span></div>
+                    <div class="person-info">Водителькие права: <span id="driver_license"></span></div>
+                    <div class="person-info">СНИЛС: <span id="insurance"></span></div>
+                    <div class="person-info">ИНН: <span id="inn"></span></div>
+                </div>
+                <a id="fullInfoButton">
+                    <img src="{% static 'img/eye.png' %}" class="fullInfoEye" alt="Icon Description">
+                </a>
             </div>
             <span class="glitch" id="personNotFound" style="display: none" data-text="Ничего не найдено">Ничего не найдено</span>
         </div>
@@ -166,13 +168,12 @@
             </svg>
         </div>
     </div>
-    <div class="wrapper">
     <footer class="footer" id="footer">
         <div class="container">
             <p>&copy; 2023 FindPerson. All rights reserved.</p>
         </div>
     </footer>
-    </div>
+</div>
     <script src="{% static 'js/home.js' %}" type="module" defer></script>
     <script src="{% static 'js/phoneinput.js' %}" defer></script>
     <script src="{% static 'js/common.js' %}" defer></script>
