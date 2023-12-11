@@ -16,50 +16,69 @@ django.setup()
 from search_base.models import Person
 
 import csv
+from loguru import logger
 
 
 file_path = 'russian_tax.csv'
 
-with open(file_path, 'r', newline='', encoding='cp1251') as file:
-    # Create a CSV reader
-    reader = csv.reader(file, delimiter='|')
-    row_count = 55000000
-    # Read and print the first 5 rows
-    for i, row in enumerate(reader):
+BATCH_SIZE = 1000  # Adjust as needed
+CSV_SIZE = 55000000
 
-        if i % 300000 == 0:
-            print(f"Progress: {(i/row_count):.2f}%")
-        if row is not None:
-            try:
-                name1, name2, name3, birthday, phone, insurance, inn, email = row
-            except Exception as r:
-                print(r)
-                continue
+with open(file_path, 'r', newline='', encoding='cp1251') as file:
+    reader = csv.reader(file, delimiter='|')
+    batch = []
+
+    for i, row in enumerate(reader):
+        if i % BATCH_SIZE == 0 and batch:
+            # Process the batch using update_or_create
+            for person_data in batch:
+                Person.objects.update_or_create(
+                    phone_number=person_data['phone_number'],
+                    defaults={
+                        'fullname': person_data['fullname'],
+                        'insurance': person_data['insurance'],
+                        'inn': person_data['inn'],
+                        'email': person_data['email'],
+                        'birthday': person_data['birthday'],
+                    }
+                )
+            logger.debug(f"{i/CSV_SIZE*100}% Done")
+            batch = []
+
+        # Process each row
+        try:
+            name1, name2, name3, birthday, phone, insurance, inn, email = row
             phone = "7" + phone[1:]
             fullname = f'{name1} {name2} {name3}'.title()
-            try:
-                person, created = Person.objects.get_or_create(
-                    phone_number=phone
-                )
-                if created:
-                    if birthday:
-                        birthday = datetime.strptime(birthday, '%d.%m.%Y').date()
-                        person.birthday = birthday
-                    person.fullname = fullname
-                    person.insurance = insurance
-                    person.inn = inn
-                    person.email = email
 
-                else:
-                    if not person.fullname and fullname:
-                        person.fullname = fullname
-                    if not person.insurance and insurance:
-                        person.insurance = insurance
-                    if not person.inn and inn:
-                        person.inn = inn
-                    if not person.email and email:
-                        person.email = email
-                person.save()
-            except Exception as r:
-                print(r)
+            # Handle empty date string
+            birthday = (
+                datetime.strptime(birthday, '%d.%m.%Y').date()
+                if birthday.strip() != '' else None
+            )
 
+            person_data = {
+                'phone_number': phone,
+                'birthday': birthday,
+                'fullname': fullname,
+                'insurance': insurance,
+                'inn': inn,
+                'email': email,
+            }
+
+            batch.append(person_data)
+        except Exception as e:
+            print(e)
+
+        # Process any remaining items in the last batch using update_or_create
+    for person_data in batch:
+        Person.objects.update_or_create(
+            phone_number=person_data['phone_number'],
+            defaults={
+                'fullname': person_data['fullname'],
+                'insurance': person_data['insurance'],
+                'inn': person_data['inn'],
+                'email': person_data['email'],
+                'birthday': person_data['birthday'],
+            }
+        )
