@@ -32,6 +32,7 @@ with open(file_path, 'r', newline='', encoding='cp1251') as file:
                 print(r)
                 continue
             phone = "7" + phone[1:]
+            fullname = f'{name1} {name2} {name3}'.title()
             try:
                 person, created = Person.objects.get_or_create(
                     phone_number=phone
@@ -40,11 +41,21 @@ with open(file_path, 'r', newline='', encoding='cp1251') as file:
                     if birthday:
                         birthday = datetime.strptime(birthday, '%d.%m.%Y').date()
                         person.birthday = birthday
-                    person.fullname = f'{name1} {name2} {name3}'.title()
+                    person.fullname = fullname
                     person.insurance = insurance
                     person.inn = inn
                     person.email = email
-                    person.save()
+
+                else:
+                    if not person.fullname and fullname:
+                        person.fullname = fullname
+                    if not person.insurance and insurance:
+                        person.insurance = insurance
+                    if not person.inn and inn:
+                        person.inn = inn
+                    if not person.email and email:
+                        person.email = email
+                person.save()
             except Exception as r:
                 print(r)
 
