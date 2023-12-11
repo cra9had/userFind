@@ -18,7 +18,7 @@ from search_base.models import Person
 import csv
 
 
-file_path = 'D:\БАЗА\\russian_tax.csv'
+file_path = 'russian_tax.csv'
 
 with open(file_path, 'r', newline='', encoding='cp1251') as file:
     # Create a CSV reader
