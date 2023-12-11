@@ -23,9 +23,13 @@ body {
     /*margin: 20px;*/
     padding: 20px;
     min-height: 100%;
-    display: flex;
-    flex-direction: column;
     flex: 1 1 auto;
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction:column;
 }
 
 .footer {
@@ -400,4 +404,16 @@ svg {
     font-size: 18px;
     padding: 10px;
     font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+@media screen and (max-width: 599px) {
+    .userInfo {
+        font-size: 15px; /* Smaller font size for phones */
+    }
+}
+
+.fullInfoEye {
+    height: 30px;
+    width: 30px;
 }
