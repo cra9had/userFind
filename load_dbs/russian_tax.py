@@ -4,7 +4,11 @@ from pathlib import Path
 import django
 from datetime import datetime
 import sys
-sys.path.append(Path(__file__).resolve().parent.parent)
+
+current_script_path = Path(__file__).resolve()
+parent_dir = current_script_path.parent.parent
+
+sys.path.append(str(parent_dir))
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "web.settings")
 
