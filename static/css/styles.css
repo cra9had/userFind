@@ -226,6 +226,19 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+.popup.buyData-popup {
+    display: none;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1e1e1e;
+    padding: 20px;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 @media (max-width: 600px) {
     .popup.login-popup {
         top: 50%; /* Set the desired width for smaller screens */
@@ -416,4 +429,17 @@ svg {
 .fullInfoEye {
     height: 30px;
     width: 30px;
+}
+
+.popup-label {
+    color: #bbbbbb;
+    font-size: 16px;
+    text-align: left;
+}
+@media screen and (max-width: 599px) {
+    .popup-label {
+        color: #bbbbbb;
+        font-size: 14px;
+        text-align: left;
+    }
 }

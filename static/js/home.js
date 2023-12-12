@@ -213,7 +213,7 @@ async function search(event) {
             })
             document.getElementById("main-section").style.display = "block"
             document.getElementById("searching-loader").style.display = "none"
-            document.getElementById("userInfo").style.display = "block"
+            document.getElementById("userInfo").style.display = "flex"
             document.getElementById("personNotFound").style.display = "none"
             clearInterval(intervalId)
         }
@@ -262,6 +262,7 @@ async function search(event) {
     const data = await response.json()
     if (response.status === 201) {
         let pk = data["pk"]
+        sessionStorage.setItem("pk", pk)
         document.getElementById("main-section").style.display = "none"
         document.getElementById("searching-loader").style.display = "block"
         intervalId = setInterval(async function () {
@@ -352,3 +353,11 @@ async function getUserInfo(){
 }
 
 
+document.getElementById("fullInfoButton").onclick = function (event) {
+    const popup = document.getElementById("buyDataPopup")
+    event.preventDefault()
+    popup.style.display = 'block'
+    document.getElementById("closeBuyData").onclick = function (event) {
+        popup.style.display = 'none'
+    }
+}
