@@ -200,6 +200,7 @@ body {
     border: 1px solid #bbbbbb;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
 
     @media screen and (min-width: 768px) {
             width: 500px; /* Increase width for desktop */
@@ -224,6 +225,7 @@ body {
     border: 1px solid #bbbbbb;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
 }
 
 .popup.buyData-popup {
@@ -237,6 +239,7 @@ body {
     border: 1px solid #bbbbbb;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
 }
 
 @media (max-width: 600px) {
