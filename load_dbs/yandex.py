@@ -37,7 +37,7 @@ with open(file_path, 'r', newline='', encoding='utf-8') as file:
                     _, created = Person.objects.update_or_create(
                         phone_number=person_data['phone_number'],
                         defaults={
-                            'address': person_data['address'],
+                            'possibles_addresses': person_data['address'],
                         }
                     )
                     MERGED += int(not created)
@@ -65,6 +65,6 @@ with open(file_path, 'r', newline='', encoding='utf-8') as file:
         Person.objects.update_or_create(
             phone_number=person_data['phone_number'],
             defaults={
-                'address': person_data['address'],
+                'possibles_addresses': person_data['address'],
             }
         )
