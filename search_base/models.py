@@ -18,6 +18,14 @@ class Person(models.Model):
         verbose_name = "Person"
         verbose_name_plural = "People"
 
+    def get_json(self):
+        person_json = self.__dict__.copy()
+        person_json.pop("_state", None)
+        person_json.pop("id", None)
+        if person_json["birthday"]:
+            person_json["birthday"] = person_json["birthday"].strftime("%d.%m.%Y")
+        return person_json
+
     def __str__(self):
         return f"{self.fullname} | {self.birthday} | {self.phone_number}"
 
@@ -38,6 +46,7 @@ class SearchHistory(models.Model):
     search_query = models.JSONField(verbose_name="Search query")
     status = models.IntegerField(choices=SEARCH_STATUSES, verbose_name="Status", default=0)
     search_result_pk = models.IntegerField(verbose_name="Search Person pk", null=True, blank=True)
+    paid = models.BooleanField(verbose_name="Paid", default=False)
 
     class Meta:
         verbose_name = "Search history"

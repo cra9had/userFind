@@ -21,11 +21,11 @@
             <div>
                 <div class="popup-label">Номер: <span id="phoneNumberData">+7 (925) 606-55-85</span></div>
                 <div class="popup-label">Цена: 59₽</div>
-                <button type="submit">Купить</button>
+                <div class="popup-error-label" id="buyDataError"></div>
+                <button type="submit" id="buyFullDataButton">Купить</button>
             </div>
         </div>
     </div>
-
     <div class="popup login-popup" id="loginPopup">
         <div class="popup-content">
             <span class="close" id="closeLoginBtn">&times;</span>
@@ -45,27 +45,28 @@
             </form>
         </div>
     </div>
+    <div class="">
+        <div class="popup register-popup" id="registerPopup">
+            <div class="popup-content">
+                <span class="close" id="closeRegisterBtn">&times;</span>
+                <div class="popup-heading">Регистрация</div>
+                <form id="registerForm">
+                    <label for="username">Username:</label>
+                    <input type="text" id="registerUsername" name="username" required>
 
-    <div class="popup register-popup" id="registerPopup">
-        <div class="popup-content">
-            <span class="close" id="closeRegisterBtn">&times;</span>
-            <div class="popup-heading">Регистрация</div>
-            <form id="registerForm">
-                <label for="username">Username:</label>
-                <input type="text" id="registerUsername" name="username" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="registerPassword" name="password" required>
 
-                <label for="password">Password:</label>
-                <input type="password" id="registerPassword" name="password" required>
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="registerConfirmPassword" name="confirmPassword" required>
 
-                <label for="confirmPassword">Confirm Password:</label>
-                <input type="password" id="registerConfirmPassword" name="confirmPassword" required>
+                    <div id="RegisterCaptchaContainer">
+                        <input type="text" name="captchaCode" placeholder="Enter Captcha Code">
+                    </div>
 
-                <div id="RegisterCaptchaContainer">
-                    <input type="text" name="captchaCode" placeholder="Enter Captcha Code">
-                </div>
-
-                <button type="submit">Register</button>
-            </form>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
         </div>
     </div>
 <div class="wrapper">
@@ -162,6 +163,7 @@
                     <div class="person-info">Водителькие права: <span id="driver_license"></span></div>
                     <div class="person-info">СНИЛС: <span id="insurance"></span></div>
                     <div class="person-info">ИНН: <span id="inn"></span></div>
+                    <div class="person-info">Телеграм: <span id="telegram_username"></span></div>
                 </div>
                 <a id="fullInfoButton">
                     <img src="{% static 'img/eye.png' %}" class="fullInfoEye" alt="Icon Description">
@@ -169,8 +171,8 @@
             </div>
             <span class="glitch" id="personNotFound" style="display: none" data-text="Ничего не найдено">Ничего не найдено</span>
         </div>
-    </section>
 
+    </section>
     <div id="searching-loader" style="display: none">
         <div id="spinner"></div>
         <div id="edge">

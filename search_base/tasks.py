@@ -38,10 +38,9 @@ def search_person(search_pk: int):
 
     search.search_result_pk = person.pk
     search.status = 2
-    person_json = person.__dict__
-    person_json.pop("_state", None)
-    person_json.pop("id", None)
-    if person_json["birthday"]:
-        person_json["birthday"] = person_json["birthday"].strftime("%d.%m.%Y")
-    cache.set(f"search_{search_pk}", json.dumps(encrypt_search_result(person_json)))
+    if not search.paid:
+        result = encrypt_search_result(person.get_json())
+    else:
+        result = person.get_json()
+    cache.set(f"search_{search_pk}", json.dumps(result))
     search.save()

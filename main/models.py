@@ -13,6 +13,15 @@ class Transaction(models.Model):
     amount = models.IntegerField(verbose_name="Amount", help_text="RUB")
     is_done = models.BooleanField(verbose_name="Is done", default=False)
 
+    def save(self, *args, **kwargs):
+        if self.pk:     # Model updated
+            return super(Transaction, self).save(*args, **kwargs)
+        if self.trx_type == 1 and self.is_done:
+            assert self.user.balance >= self.amount
+            self.user.balance -= self.amount
+        self.user.save()
+        super(Transaction, self).save(*args, **kwargs)
+
     def __str__(self):
         prefix = "?" if not self.is_done else ""
         return f"{prefix}Transaction {self.amount} RUB "
@@ -20,9 +29,7 @@ class Transaction(models.Model):
 
 class Order(models.Model):
     ORDER_PRODUCTS = (
-        (0, "1 Day subscription"),
-        (1, "7 Day subscription"),
-        (2, "24 Day subscription"),
+        (0, "Full data"),
     )
     date_created = models.DateField(auto_now_add=True, verbose_name="Date")
     transaction = models.ForeignKey(Transaction, on_delete=models.PROTECT,
@@ -31,4 +38,4 @@ class Order(models.Model):
     order_product = models.IntegerField(choices=ORDER_PRODUCTS, verbose_name="Order product")
 
     def __str__(self):
-        return f"Order {self.pk}: {self.order_product} User: {self.user}"
+        return f"Order {self.pk}: {self.get_order_product_display()} User: {self.user}"

@@ -183,42 +183,50 @@ document.addEventListener('DOMContentLoaded', async function () {
 let intervalId
 
 
-async function search(event) {
-    async function getResult(pk){
-        const response = await fetch(API_URL+"search/result/"+pk+"/", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Token " + localStorage.getItem("token")
-            },
-        })
-        if (response.status === 204) {
-            return
-        } else if (response.status === 200) {
-            const data = await response.json()
-            if (data["status"] === 404 ){
-                document.getElementById("main-section").style.display = "block"
-                document.getElementById("searching-loader").style.display = "none"
-                document.getElementById("userInfo").style.display = "none"
-                document.getElementById("personNotFound").style.display = "inline-block"
-                clearInterval(intervalId)
-            }
-            Object.keys(data).forEach(field => {
-                if (field === "status"){
-                    return
-                }
-                const infoElement = document.getElementById(field)
-                infoElement.innerText = data[field]
-                infoElement.parentNode.style.display = 'block'
-            })
+async function getSearchResult(pk){
+    const response = await fetch(API_URL+"search/result/"+pk+"/", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Token " + localStorage.getItem("token")
+        },
+    })
+    if (response.status === 204) {
+        return
+    } else if (response.status === 200) {
+        const data = await response.json()
+
+        if (data["status"] === 404){
             document.getElementById("main-section").style.display = "block"
             document.getElementById("searching-loader").style.display = "none"
-            document.getElementById("userInfo").style.display = "flex"
-            document.getElementById("personNotFound").style.display = "none"
-            clearInterval(intervalId)
+            document.getElementById("userInfo").style.display = "none"
+            document.getElementById("personNotFound").style.display = "inline-block"
+            return clearInterval(intervalId)
         }
+        await setPersonData(data["result"])
+        document.getElementById("main-section").style.display = "block"
+        document.getElementById("searching-loader").style.display = "none"
+        document.getElementById("userInfo").style.display = "flex"
+        document.getElementById("personNotFound").style.display = "none"
+        clearInterval(intervalId)
     }
+}
 
+
+async function setPersonData(data) {
+    Object.keys(data).forEach(field => {
+        const infoElement = document.getElementById(field)
+        infoElement.innerText = data[field]
+        if (data[field]) {
+            infoElement.parentNode.style.display = 'block'
+        } else {
+            infoElement.parentNode.style.display = 'none'
+        }
+    })
+}
+
+
+async function search(event) {
     event.preventDefault();
     const searchType = Number(document.getElementById("search-type-select").value)
     if (searchType === 0 ) {
@@ -266,7 +274,7 @@ async function search(event) {
         document.getElementById("main-section").style.display = "none"
         document.getElementById("searching-loader").style.display = "block"
         intervalId = setInterval(async function () {
-            await getResult(pk)
+            await getSearchResult(pk)
         }, 1000);
     } else if (response.status === 400) {
         Object.keys(data).forEach(errorField => {
@@ -352,12 +360,38 @@ async function getUserInfo(){
     return await response.json()
 }
 
+const dataPopup = document.getElementById("buyDataPopup")
 
 document.getElementById("fullInfoButton").onclick = function (event) {
-    const popup = document.getElementById("buyDataPopup")
     event.preventDefault()
-    popup.style.display = 'block'
+    dataPopup.style.display = 'block'
     document.getElementById("closeBuyData").onclick = function (event) {
-        popup.style.display = 'none'
+        dataPopup.style.display = 'none'
+    }
+}
+
+
+document.getElementById("buyFullDataButton").onclick = async function (event) {
+    const token = localStorage.getItem("token")
+    const response = await fetch(api_url + "buy-full-data/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Token " + token
+        },
+        body: JSON.stringify({
+            pk: sessionStorage.getItem("pk")
+        })
+    })
+    let data = await response.json()
+    if (response.status === 200){
+        await setPersonData(data["result"])
+        dataPopup.style.display = 'none'
+        document.getElementById("user-balance-amount").innerText = data.balance
+    } else if (response.status === 400) {
+        let error_text = data.error
+        let error_label = document.getElementById("buyDataError")
+        error_label.innerText = error_text
+        error_label.style.display = "block"
     }
 }

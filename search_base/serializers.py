@@ -1,3 +1,5 @@
+from django.core.cache import cache
+from django.db.models import Q
 from django.utils import timezone
 from rest_framework import serializers
 from .models import SearchHistory, Person
@@ -30,12 +32,17 @@ class SearchSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context.get("user")
         try:
-            return SearchHistory.objects.get(
+            search_history = SearchHistory.objects.get(
+                Q(date_created__contains=timezone.now().date()) | Q(paid=True),
                 user=user,
                 search_type=validated_data["search_type"],
                 search_query=validated_data["search_query"],
-                date_created__contains=timezone.now().date(),
             )
+            if not cache.get(f"search_{search_history.pk}"):
+                search_history.status = 0
+                search_history.save()
+                search_person.delay(search_history.pk)
+            return search_history
         except SearchHistory.DoesNotExist:
             pass
         search_history = SearchHistory.objects.create(

@@ -9,7 +9,6 @@ from .models import SearchHistory
 from django.core.cache import cache
 
 
-
 class SearchAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -41,5 +40,5 @@ class SearchResultAPIView(APIView):
                             status=status.HTTP_200_OK)
         elif search.status == 2:
             dumped_json = cache.get(f"search_{search.pk}")
-            return Response({"status": 200, **json.loads(dumped_json)}, status=status.HTTP_200_OK)
+            return Response({"status": 200, "result": {**json.loads(dumped_json)}}, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_404_NOT_FOUND)
