@@ -158,6 +158,11 @@ if DEBUG:
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+CORS_ALLOWED_ORIGINS = [
+    "https://unmasking.net",
+]
+
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
