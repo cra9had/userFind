@@ -56,7 +56,7 @@ with open(file_path, 'r', newline='', encoding='utf-8') as file:
                 'phone_number': phone_number,
                 'birthday': datetime.strptime(birthday, '%Y-%m-%d %H:%M:%S').date()
             }
-            if address:
+            if address and address != ",":
                 person_data["possibles_addresses"] = address
             if name:
                 person_data["fullname"] = name
