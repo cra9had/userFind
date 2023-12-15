@@ -38,7 +38,6 @@ with open(file_path, 'r', newline='', encoding='utf-8') as file:
                 try:
                     _, created = Person.objects.update_or_create(
                         phone_number=person_data['phone_number'],
-                        **kwarg,
                         defaults=person_data
                     )
                     MERGED += int(not created)
