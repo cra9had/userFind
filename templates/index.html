@@ -13,39 +13,42 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-    <div class="popup buyData-popup" id="buyDataPopup">
-        <div class="popup-content">
-            <span class="close" id="closeBuyData">&times;</span>
-            <div class="popup-heading">Полные данные</div>
-            <div>
-                <div class="popup-label">Номер: <span id="phoneNumberData">+7 (925) 606-55-85</span></div>
-                <div class="popup-label">Цена: 59₽</div>
-                <div class="popup-error-label" id="buyDataError"></div>
-                <button type="submit" id="buyFullDataButton">Купить</button>
+    <div class="popup-wrapper" id="buyDataPopup">
+        <div class="popup buyData-popup">
+            <div class="popup-content">
+                <span class="close" id="closeBuyData">&times;</span>
+                <div class="popup-heading">Полные данные</div>
+                <div>
+                    <div class="popup-label">Номер: <span id="phoneNumberData">+7 (925) 606-55-85</span></div>
+                    <div class="popup-label">Цена: 59₽</div>
+                    <div class="popup-error-label" id="buyDataError"></div>
+                    <button type="submit" id="buyFullDataButton">Купить</button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="popup login-popup" id="loginPopup">
-        <div class="popup-content">
-            <span class="close" id="closeLoginBtn">&times;</span>
-            <div class="popup-heading">Вход</div>
-            <form id="loginForm">
-                <label for="loginUsername">Username:</label>
-                <input type="text" id="loginUsername" name="loginUsername" required>
+    <div class="popup-wrapper" id="loginPopup">
+        <div class="popup login-popup">
+            <div class="popup-content">
+                <span class="close" id="closeLoginBtn">&times;</span>
+                <div class="popup-heading">Вход</div>
+                <form id="loginForm">
+                    <label for="loginUsername">Username:</label>
+                    <input type="text" id="loginUsername" name="loginUsername" required>
 
-                <label for="loginPassword">Password:</label>
-                <input type="password" id="loginPassword" name="loginPassword" required>
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" id="loginPassword" name="loginPassword" required>
 
-                <div id="LoginCaptchaContainer">
-                    <input type="text" name="captchaCode" placeholder="Enter Captcha Code">
-                </div>
+                    <div id="LoginCaptchaContainer">
+                        <input type="text" name="captchaCode" placeholder="Enter Captcha Code">
+                    </div>
 
-                <button type="submit">Login</button>
-            </form>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="">
+    <div class="popup-wrapper" id="registerPopup">
         <div class="popup register-popup" id="registerPopup">
             <div class="popup-content">
                 <span class="close" id="closeRegisterBtn">&times;</span>

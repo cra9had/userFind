@@ -1,4 +1,4 @@
-var API_URL = 'http://191.96.53.250/api/';
+var API_URL = 'https://unmusking.net/api/';
 
 // Check if the environment is local (you can adjust this condition based on your setup)
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
@@ -365,6 +365,7 @@ const dataPopup = document.getElementById("buyDataPopup")
 document.getElementById("fullInfoButton").onclick = function (event) {
     event.preventDefault()
     dataPopup.style.display = 'block'
+    document.getElementById("buyDataError").style.display = "none"
     document.getElementById("closeBuyData").onclick = function (event) {
         dataPopup.style.display = 'none'
     }
