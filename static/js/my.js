@@ -1,4 +1,4 @@
-var API_URL = 'https://unmusking.net/api/';
+var API_URL = 'https://unmasking.net/api/';
 
 // Check if the environment is local (you can adjust this condition based on your setup)
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
