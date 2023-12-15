@@ -16,6 +16,8 @@ def search_person(search_pk: int):
             person = Person.objects.get(
                 phone_number__contains=search.search_query["phone_number"][1:]
             )
+        except Person.MultipleObjectsReturned:
+            person = Person.objects.filter(phone_number__contains=search.search_query["phone_number"][1:]).first()
         except Person.DoesNotExist:
             search.status = 1   # Not found
             search.save()
