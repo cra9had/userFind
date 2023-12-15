@@ -64,7 +64,7 @@ with open(file_path, 'r', newline='', encoding='utf-8') as file:
                 person_data["email"] = email
             if passport:
                 person_data["passport"] = passport
-            if insurance:
+            if insurance and insurance != "Отсутствует":
                 person_data["insurance"] = insurance
 
             batch.append(person_data)
