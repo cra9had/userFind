@@ -37,8 +37,8 @@ with open(file_path, 'r', newline='', encoding='utf-8') as file:
                 kwarg = dict() if not person_data["possibles_addresses"] else {"possibles_addresses": person_data["possibles_addresses"]}
                 try:
                     _, created = Person.objects.update_or_create(
-                        **kwarg,
                         phone_number=person_data['phone_number'],
+                        **kwarg,
                         defaults=person_data
                     )
                     MERGED += int(not created)
