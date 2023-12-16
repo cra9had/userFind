@@ -727,6 +727,7 @@
   font-weight: bold;
   position: relative;
   display: inline-block;
+  margin-bottom: 3rem;
 }
 
 .glitch::before,

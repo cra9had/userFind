@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FindPerson</title>
+    <title>Unmasking™</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="{% static 'css/loader.css' %}">
@@ -19,7 +19,7 @@
                 <span class="close" id="closeBuyData">&times;</span>
                 <div class="popup-heading">Полные данные</div>
                 <div>
-                    <div class="popup-label">Номер: <span id="phoneNumberData">+7 (925) 606-55-85</span></div>
+                    <div class="popup-label">Номер: <span id="phoneNumberData"></span></div>
                     <div class="popup-label">Цена: 59₽</div>
                     <div class="popup-error-label" id="buyDataError"></div>
                     <button type="submit" id="buyFullDataButton">Купить</button>
@@ -74,7 +74,7 @@
     </div>
 <div class="wrapper">
     <nav id="header-section" class="navbar navbar-expand-lg navbar-dark bg-dark" style="display: none">
-        <a class="navbar-brand" href="#">FindPerson</a>
+        <a class="navbar-brand" href="#">Unmasking™</a>
         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -99,7 +99,7 @@
 
                     <div class="dropdown-menu profile-menu" aria-labelledby="userDropdown">
                         <a class="dropdown-item profile" href="my/">Профиль</a>
-                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Пополнение</a>
                         <span class="dropdown-item user-balance">Баланс: <span id="user-balance-amount">0</span>₽</span>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" id="logoutButton">Выйти</a>
@@ -124,8 +124,8 @@
     <section id="main-section" class="main-section" style="display: none">
         <div class="container">
             <div class="welcome-container">
-                <h2>Welcome to FindPerson</h2>
-                <p>This is a place where you can find information about a person using their phone number, with their explicit consent.</p>
+                <h2>Welcome to Unmasking</h2>
+                <p>Unmasking - это уникальное проект, в котором Вы можете найти подробную информацию о человеке по его номеру и не только. В нашей базе только лица из РФ</p>
             </div>
             <select class="search-type-select" id="search-type-select">
                 <option selected value="0">Пробив по номеру телефону</option>

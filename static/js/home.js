@@ -364,6 +364,7 @@ const dataPopup = document.getElementById("buyDataPopup")
 
 document.getElementById("fullInfoButton").onclick = function (event) {
     event.preventDefault()
+    document.getElementById("phoneNumberData").innerText = document.getElementById("phoneInput").value
     dataPopup.style.display = 'block'
     document.getElementById("buyDataError").style.display = "none"
     document.getElementById("closeBuyData").onclick = function (event) {

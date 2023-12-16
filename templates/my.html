@@ -14,6 +14,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <div class="wrapper">
     <nav id="header-section" class="navbar navbar-expand-lg navbar-dark bg-dark" style="display: none">
         <a class="navbar-brand" href="/">FindPerson</a>
         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,26 +30,23 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto" id="userProfileMenu">
-            <!-- Check if user is logged in -->
             <li class="nav-item" id="userProfile">
-                <!-- Avatar image -->
-                <div class="user-avatar-mini-container">
-                    <img src="/media/profiles/default.png" alt="User Avatar" class="rounded-circle avatar-img overflow-hidden" id="avatarImg">
-                </div>
-                <!-- Context menu -->
-                <div class="dropdown profile-context-menu">
+                <div class="dropdown profile-context-menu" style="display: flex">
+                    <div class="user-avatar-mini-container">
+                        <img src="/media/profiles/default.png" alt="User Avatar" class="rounded-circle avatar-img overflow-hidden" id="avatarImg">
+                    </div>
                     <a class="nav-link dropdown-toggle" href="#" role="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Username <!-- Replace with the actual username -->
+                        Username
                     </a>
 
                     <div class="dropdown-menu profile-menu" aria-labelledby="userDropdown">
-                        <!-- Add context menu items here -->
-                        <a class="dropdown-item profile" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item profile" href="/">Главная</a>
+                        <a class="dropdown-item" href="#">Пополнение</a>
                         <span class="dropdown-item user-balance">Баланс: <span id="user-balance-amount">0</span>₽</span>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" id="logoutButton">Logout</a>
+                        <a class="dropdown-item" href="#" id="logoutButton">Выйти</a>
                     </div>
+
                 </div>
             </li>
         </ul>
@@ -90,9 +88,10 @@
     </section>
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2023 FindPerson. All rights reserved.</p>
+            <p>&copy; 2023 Unmasking. All rights reserved.</p>
         </div>
     </footer>
+    </div>
     <script src="{% static 'js/my.js' %}" defer></script>
     <script src="{% static 'js/common.js' %}" defer></script>
 </body>
