@@ -30,6 +30,9 @@ class BuyFullDataAPIView(APIView):
         return Response({"balance": self.request.user.balance, "result": full_data}, status=status.HTTP_200_OK)
 
 
+def verify(request):
+    return render(request, "fk-verify.html")
+
 def home(request):
     return render(request, "index.html")
 
