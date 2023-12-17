@@ -89,6 +89,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 79%;
 }
 
 .search-type-select {
@@ -554,8 +555,8 @@ svg {
 img.img-main {
     width: 21%;
 }
-@media screen and(max-width: 768px) {
+@media screen and(max-width: 1000px) {
     .img-main {
-        min-width: 280px;
+        min-width: 250px;
     }
 }
