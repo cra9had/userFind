@@ -555,7 +555,7 @@ svg {
 img.img-main {
     width: 21%;
 }
-@media screen and(max-width: 1000px) {
+@media (max-width: 1000px) {
     .img-main {
         min-width: 250px;
     }
