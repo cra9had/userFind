@@ -13,6 +13,31 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <div class="popup-wrapper" id="topUpPopup" style="">
+        <div class="popup topUp-popup">
+            <div class="popup-content">
+                <span class="close" id="closeBuyData">&times;</span>
+                <div class="popup-heading">Пополнение баланса</div>
+                <div>
+                    <div>
+                        <label class="popup-label" for="topUpAmount">Сумма пополнения</label>
+                        <input id="topUpAmount" placeholder="Сумма в &#8381;">
+                    </div>
+                    <div>
+                        <label class="popup-label" for="topUpAmount">Способ оплаты</label>
+                        <div class="topUpMethods">
+                            <button type="submit" id="topUpMethod" value="1" style="margin-top: 0">
+                                <img src="{% static 'img/bitcoin.png' %}" alt="Icon">Криптовалюта
+                            </button>
+                            <button type="submit" class="topUpMethod" value="2">Банковская карта РФ</button>
+                        </div>
+                    </div>
+                    <button>Пополнить</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="popup-wrapper" id="buyDataPopup">
         <div class="popup buyData-popup">
             <div class="popup-content">
@@ -74,7 +99,10 @@
     </div>
 <div class="wrapper">
     <nav id="header-section" class="navbar navbar-expand-lg navbar-dark bg-dark" style="display: none">
-        <a class="navbar-brand" href="#">Unmasking™</a>
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'img/icon.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+            Unmasking™
+        </a>
         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -99,7 +127,7 @@
 
                     <div class="dropdown-menu profile-menu" aria-labelledby="userDropdown">
                         <a class="dropdown-item profile" href="my/">Профиль</a>
-                        <a class="dropdown-item" href="/topup/">Пополнение</a>
+                        <a class="dropdown-item" href="#">Пополнение</a>
                         <span class="dropdown-item user-balance">Баланс: <span id="user-balance-amount">0</span>&#8381;</span>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" id="logoutButton">Выйти</a>
@@ -123,9 +151,12 @@
     <!-- Main Content Container -->
     <section id="main-section" class="main-section" style="display: none">
         <div class="container">
-            <div class="welcome-container">
-                <h2>Welcome to Unmasking</h2>
-                <p>Unmasking - это уникальное проект, в котором Вы можете найти подробную информацию о человеке по его номеру и не только. В нашей базе только лица из РФ</p>
+            <div>
+                <img src="{% static 'img/icon_big.png' %}">
+                <div class="welcome-container">
+                    <h2>Welcome to Unmasking</h2>
+                    <p>Unmasking - это уникальное проект, в котором Вы можете найти подробную информацию о человеке по его номеру и не только. В нашей базе только лица из РФ</p>
+                </div>
             </div>
             <select class="search-type-select" id="search-type-select">
                 <option selected value="0">Пробив по номеру телефону</option>

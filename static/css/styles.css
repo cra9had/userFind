@@ -240,6 +240,19 @@ body {
     z-index: 10;
 }
 
+.popup.topUp-popup {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1e1e1e;
+    padding: 20px;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
 @media (max-width: 600px) {
     .popup.login-popup {
         top: 50%; /* Set the desired width for smaller screens */
@@ -487,8 +500,50 @@ svg {
     border: 1px solid #bbbbbb;
     border-radius: 5px;
     padding: 5px;
+    width: 50%;
 }
 
-.topUpForm .row {
+@media screen and (max-width: 599px) {
+    .topUpForm input {
+        width: 80%;
+    }
+}
+
+.topUpForm button {
+    margin-bottom: 10px;
+    background-color: #222;
+    color: #bbbbbb; /* Set the font color to green or your preferred color */
+    border: none;
+    padding: 5px;
+    margin-top: 5px;
+    width: 120px;
+    font-size: 18px;
+}
+
+.topUpForm button:hover {
+    color: #fff;
+    background-color: #222;
+}
+
+.topUpForm input:focus {
+    background-color: #333;
+}
+
+.topUpForm input:focus {
+    border-color: #bbbbbb;
+    outline: none;
+    background-color: #222;
+    color: white;
+}
+
+.topUpForm .topupForm {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.topUpMethods {
     display: grid;
 }
