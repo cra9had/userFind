@@ -18,11 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from main.views import verify
 
 urlpatterns = [
     path('', include('main.urls')),
-    path('fk-verify.html', verify),
     path('api/auth/', include('authentication.urls')),
     path('api/', include('search_base.urls')),
     path(r'api/captcha/', include('rest_captcha.urls')),

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>Пополнение баланса</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="{% static 'css/loader.css' %}">
@@ -41,7 +41,7 @@
 
                     <div class="dropdown-menu profile-menu" aria-labelledby="userDropdown">
                         <a class="dropdown-item profile" href="/">Главная</a>
-                        <a class="dropdown-item" href="{% url 'topup' %}">Пополнение</a>
+                        <a class="dropdown-item" href="#">Пополнение</a>
                         <span class="dropdown-item user-balance">Баланс: <span id="user-balance-amount">0</span>&#8381;</span>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" id="logoutButton">Выйти</a>
@@ -52,8 +52,6 @@
         </ul>
         </div>
     </nav>
-
-    <!-- Loading Animation Container -->
     <div id="loader">
         <div class="ls-particles ls-part-1"></div>
         <div class="ls-particles ls-part-2"></div>
@@ -63,36 +61,21 @@
         <div class="lightsaber ls-left ls-green"></div>
         <div class="lightsaber ls-right ls-red"></div>
     </div>
-
-    <!-- Main Content Container -->
-    <section id="main-section" class="main-section" style="display: none">
-        <div class="user-settings-container mt-4 container">
-            <div class="user-photo-container rounded-circle overflow-hidden">
-                <img src="/media/profiles/default.png" alt="User Photo" class="user-photo img-fluid" id="user-photo">
+    <div class="main-section" id="main-section">
+        <form class="topUpForm container">
+            <div class="row">
+                <label for="top-up-amount">Выберите сумму пополнения</label>
+                <input id="top-up-amount" type="number" min="1" placeholder="Сумма в &#8381;">
             </div>
-
-            <div class="file-upload">
-                <label for="upload-photo" class="btn btn-secondary">
-                    Choose Avatar
-                    <input type="file" id="upload-photo" name="upload-photo" style="display: none;">
-                </label>
-            </div>
-
-            <div class="password-fields">
-                <span class="font-weight-bold d-block mb-3 change-pw-label">Change Password</span>
-                <input type="password" id="old-password" name="old-password" class="form-control" placeholder="Old password">
-                <input type="password" id="new-password" name="new-password" class="form-control" placeholder="New Password">
-                <button type="submit" id="saveSettings">Save</button>
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2023 Unmasking. All rights reserved.</p>
-        </div>
+        </form>
+    </div>
+    <footer class="footer" id="footer">
+    <div class="container">
+        <p>&copy; 2023 Unmasking. All rights reserved.</p>
+    </div>
     </footer>
     </div>
-    <script src="{% static 'js/my.js' %}" defer></script>
     <script src="{% static 'js/common.js' %}" defer></script>
+    <script src="{% static 'js/topup.js' %}"></script>
 </body>
 </html>

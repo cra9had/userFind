@@ -24,6 +24,7 @@ body {
     padding: 20px;
     min-height: 100%;
     flex: 1 1 auto;
+    color: #bbbbbb;
 }
 
 .wrapper {
@@ -477,4 +478,17 @@ svg {
     background-color: rgba(0, 0, 0, .3);
     align-items: center;
     justify-content: center;
+}
+
+.topUpForm input {
+    margin-bottom: 10px;
+    background-color: #222;
+    color: #fff; /* Set the font color to white */
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.topUpForm .row {
+    display: grid;
 }
