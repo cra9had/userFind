@@ -86,6 +86,9 @@ body {
     border-radius: 10px;
     padding: 20px;
     color: #bbbbbb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .search-type-select {
@@ -546,4 +549,13 @@ svg {
 
 .topUpMethods {
     display: grid;
+}
+
+img.img-main {
+    width: 21%;
+}
+@media screen and(max-width: 768px) {
+    .img-main {
+        min-width: 280px;
+    }
 }
