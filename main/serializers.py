@@ -15,6 +15,7 @@ class TopUpSerializer(serializers.Serializer):
     def validate_amount(self, value):
         if self.initial_data.get("top_up_method") == Transaction.OXA_PAY and value < OXA_PAY_MIN_TOP_UP_AMOUNT_RUB:
             raise serializers.ValidationError(f"Мин. сумма {OXA_PAY_MIN_TOP_UP_AMOUNT_RUB}р")
+        return value
 
     def validate_top_up_method(self, value):
         if not value in dict(Transaction.TOP_UP_METHODS):
