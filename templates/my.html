@@ -9,11 +9,36 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="{% static 'css/loader.css' %}">
     <link rel="stylesheet" href="{% static 'css/my.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}" >
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <div class="popup-wrapper" id="topUpPopup">
+        <div class="popup topUp-popup">
+            <div class="popup-content">
+                <span class="close" id="closeTopUp">&times;</span>
+                <div class="popup-heading">Пополнение баланса</div>
+                <div>
+                    <div>
+                        <label class="popup-label" for="topUpAmount">Сумма пополнения</label>
+                        <input id="topUpAmount" placeholder="Сумма в &#8381;">
+                    </div>
+                    <div>
+                        <label class="popup-label">Способ оплаты</label>
+                        <div class="topUpMethods">
+                            <button type="submit" id="topUpMethod" value="1" style="margin-top: 0">
+                                <img src="{% static 'img/bitcoin.png' %}" alt="Icon">Криптовалюта
+                            </button>
+                            <button type="submit" class="topUpMethod" value="2">Банковская карта РФ</button>
+                        </div>
+                    </div>
+                    <button>Пополнить</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="wrapper">
     <nav id="header-section" class="navbar navbar-expand-lg navbar-dark bg-dark" style="display: none">
         <a class="navbar-brand" href="/">Unmasking™</a>

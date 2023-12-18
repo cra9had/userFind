@@ -558,5 +558,6 @@ img.img-main {
 @media (max-width: 1000px) {
     .img-main {
         min-width: 250px;
+        margin-bottom: -15px;
     }
 }
