@@ -20,3 +20,11 @@ document.getElementById("logoutButton").onclick = async function () {
     })
     location.reload()
 }
+
+
+function openTopUpPopup() {
+    document.getElementById("topUpPopup").style.display = "block"
+    document.getElementById("closeTopUp").onclick = function () {
+        document.getElementById("topUpPopup").style.display = "none"
+    }
+}

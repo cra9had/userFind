@@ -112,6 +112,8 @@ body {
     border-radius: 5px;
     height: 40px;
     display: flex;
+    width: 100%;
+    padding: 8px 10px;
 }
 
 .search-type-select:hover {
@@ -260,7 +262,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #1e1e1e;
-    padding: 20px;
+    padding: 30px;
     border: 1px solid #bbbbbb;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -277,6 +279,11 @@ body {
     font-size: 25px;
     color: #bbbbbb;
 }
+
+.topUpLabel {
+    margin-bottom: 30px;
+}
+
 
 .popup-content {
     text-align: center;
@@ -506,6 +513,12 @@ svg {
     align-items: center;
     justify-content: center;
 }
+
+.popup .topUp-popup input {
+    padding: 8px 10px
+}
+
+
 
 .topUpForm input {
     margin-bottom: 10px;
