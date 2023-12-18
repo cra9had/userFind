@@ -26,7 +26,7 @@ def get_payment_url(rub_amount, transaction_pk):
         'merchant': settings.OXAPAY_API_KEY,
         'amount': get_amount_in_usd(rub_amount),
         'currency': 'USD',
-        'callbackUrl': 'https://f5a5-95-168-164-194.ngrok-free.app/api/oxapay/payment/',  # TODO: Replace url
+        'callbackUrl': 'https://unmasking.net/api/oxapay/payment/',
         'returnUrl': 'https://unmasking.net/',
         'description': 'Пополнение баланса',
         'orderId': f'{transaction_pk}',
