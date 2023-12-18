@@ -38,5 +38,8 @@ def payok(request):
     return render(request, "payok_project_verification.txt")
 
 
+def betatransfer(request):
+    return render(request, "betatransfer.txt")
+
 def my(request):
     return render(request, "my.html")
