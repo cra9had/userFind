@@ -38,6 +38,7 @@ body {
     color: #bbbbbb;
     bottom: 0;
     width: 100%;
+    position:relative;
 }
 
 .buttons {
@@ -102,6 +103,15 @@ body {
     border: 1px solid #bbbbbb;
     border-radius: 5px;
     height: 40px;
+}
+
+.topupMethod-select {
+    background-color: #1b1b1e;
+    color: #bbbbbb;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    height: 40px;
+    display: flex;
 }
 
 .search-type-select:hover {
@@ -548,12 +558,10 @@ svg {
     align-items: center;
 }
 
-.topUpMethods {
-    display: grid;
-}
 
 img.img-main {
     width: 21%;
+    margin-right: -2px;
 }
 @media (max-width: 1000px) {
     .img-main {
@@ -561,3 +569,9 @@ img.img-main {
         margin-bottom: -15px;
     }
 }
+
+.footer img {
+    position:absolute;
+    right: 0;
+}
+
