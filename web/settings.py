@@ -162,6 +162,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://unmasking.net",
 ]
 
+OXAPAY_API_KEY = env("OXAPAY_API_KEY")
+CURRENCY_API = env("CURRENCY_API")
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
