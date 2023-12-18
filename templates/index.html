@@ -27,10 +27,10 @@
                     <div>
                         <label class="popup-label">Способ оплаты</label>
                         <div class="topUpMethods">
-                            <button type="submit" id="topUpMethod" value="1" style="margin-top: 0">
-                                <img src="{% static 'img/bitcoin.png' %}" alt="Icon">Криптовалюта
-                            </button>
-                            <button type="submit" class="topUpMethod" value="2">Банковская карта РФ</button>
+                            <select class="topupMethod-select" id="topUpMethod">
+                                <option selected value="0">Банковская Карта РФ</option>
+                                <option value="1">Криптовалюта</option>
+                            </select>
                         </div>
                     </div>
                     <button>Пополнить</button>
@@ -218,6 +218,11 @@
     <footer class="footer" id="footer">
         <div class="container">
             <p>&copy; 2023 Unmasking. All rights reserved.</p>
+            <div>
+                <a href="https://t.me/unmaskinghub">
+                    <img src="{% static 'img/tg.png' %}" alt="telegram" style="width: 35px">
+                </a>
+            </div>
         </div>
     </footer>
 </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>Unmasking™ - Мой профиль</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="{% static 'css/loader.css' %}">
@@ -15,7 +15,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="popup-wrapper" id="topUpPopup">
+    <div class="popup-wrapper" id="topUpPopup" style="">
         <div class="popup topUp-popup">
             <div class="popup-content">
                 <span class="close" id="closeTopUp">&times;</span>
@@ -66,7 +66,7 @@
 
                     <div class="dropdown-menu profile-menu" aria-labelledby="userDropdown">
                         <a class="dropdown-item profile" href="/">Главная</a>
-                        <a class="dropdown-item" href="#">Пополнение</a>
+                        <a class="dropdown-item" href="#" onclick="openTopUpPopup()">Пополнение</a>
                         <span class="dropdown-item user-balance">Баланс: <span id="user-balance-amount">0</span>&#8381;</span>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" id="logoutButton">Выйти</a>
@@ -111,9 +111,14 @@
             </div>
         </div>
     </section>
-    <footer class="footer">
+    <footer class="footer" id="footer">
         <div class="container">
             <p>&copy; 2023 Unmasking. All rights reserved.</p>
+            <div>
+                <a href="https://t.me/unmaskinghub">
+                    <img src="{% static 'img/tg.png' %}" alt="telegram" style="width: 35px">
+                </a>
+            </div>
         </div>
     </footer>
     </div>
