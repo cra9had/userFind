@@ -214,6 +214,11 @@ async function getSearchResult(pk){
 
 
 async function setPersonData(data) {
+    const elementsWithClass = document.getElementsByClassName('person-info');
+
+    for (let i = 0; i < elementsWithClass.length; i++) {
+        elementsWithClass[i].style.display = "none"
+    }
     Object.keys(data).forEach(field => {
         const infoElement = document.getElementById(field)
         infoElement.innerText = data[field]
