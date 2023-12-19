@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     const loginPopup = document.getElementById('loginPopup');
     const closeLoginBtn = document.getElementById('closeLoginBtn');
 
-    loginBtn.addEventListener('click', function () {
+    loginBtn.addEventListener('click', async function () {
         if (!isLoginPopupOpen && !isRegisterPopupOpen) {
             document.getElementById("navbarNav").classList.remove("show")
-            getCaptcha("LoginCaptchaContainer")
+            await getCaptcha("LoginCaptchaContainer")
             loginPopup.style.display = 'block';
             isLoginPopupOpen = true;
         }
@@ -58,9 +58,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     const registerPopup = document.getElementById('registerPopup');
     const closeRegisterBtn = document.getElementById('closeRegisterBtn');
 
-    registerBtn.addEventListener('click', function () {
+    registerBtn.addEventListener('click', async function () {
         if (!isLoginPopupOpen && !isRegisterPopupOpen) {
-            getCaptcha("RegisterCaptchaContainer")
+            await getCaptcha("RegisterCaptchaContainer")
             document.getElementById("navbarNav").classList.remove("show")
             registerPopup.style.display = 'block';
             isRegisterPopupOpen = true;
@@ -215,7 +215,6 @@ async function getSearchResult(pk){
 
 async function setPersonData(data) {
     const elementsWithClass = document.getElementsByClassName('person-info');
-
     for (let i = 0; i < elementsWithClass.length; i++) {
         elementsWithClass[i].style.display = "none"
     }
@@ -233,6 +232,11 @@ async function setPersonData(data) {
 
 async function search(event) {
     event.preventDefault();
+    const token = localStorage.getItem("token")
+    if (!token) {
+        await getCaptcha("RegisterCaptchaContainer")
+        return document.getElementById('registerPopup').style.display = 'block'
+    }
     const searchType = Number(document.getElementById("search-type-select").value)
     if (searchType === 0 ) {
         const phone = document.getElementById("phoneInput")
@@ -265,7 +269,7 @@ async function search(event) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Token " + localStorage.getItem("token")
+            "Authorization": "Token " + token
         },
         body: JSON.stringify({
             search_type: searchType,
@@ -280,7 +284,7 @@ async function search(event) {
         document.getElementById("searching-loader").style.display = "block"
         intervalId = setInterval(async function () {
             await getSearchResult(pk)
-        }, 1000);
+        }, 5000);
     } else if (response.status === 400) {
         Object.keys(data).forEach(errorField => {
             const error_message = data[errorField]
@@ -369,6 +373,12 @@ const dataPopup = document.getElementById("buyDataPopup")
 
 document.getElementById("fullInfoButton").onclick = function (event) {
     event.preventDefault()
+    window.addEventListener('click', function (event) {
+        console.log(event.target)
+        if (event.target === dataPopup) {
+            dataPopup.style.display = 'none';
+        }
+    });
     document.getElementById("phoneNumberData").innerText = document.getElementById("phoneInput").value
     dataPopup.style.display = 'block'
     document.getElementById("buyDataError").style.display = "none"

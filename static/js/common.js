@@ -23,9 +23,15 @@ document.getElementById("logoutButton").onclick = async function () {
 
 
 function openTopUpPopup() {
-    document.getElementById("topUpPopup").style.display = "block"
+    const popup = document.getElementById("topUpPopup")
+    popup.style.display = "block"
+    window.addEventListener('click', function (event) {
+        if (event.target === popup) {
+            popup.style.display = 'none';
+        }
+    });
     document.getElementById("closeTopUp").onclick = function () {
-        document.getElementById("topUpPopup").style.display = "none"
+        popup.style.display = "none"
     }
 }
 
