@@ -1,3 +1,4 @@
+import hashlib
 import json
 import requests
 import currencyapicom
@@ -6,6 +7,7 @@ from django.db import transaction
 from django.conf import settings
 from .models import Transaction, Order
 from authentication.models import User
+from urllib.parse import urlencode
 from search_base.models import SearchHistory, Person
 
 
@@ -19,7 +21,30 @@ def get_amount_in_usd(rub_amount):
     return float(rub_amount) / rate
 
 
-def get_payment_url(rub_amount, transaction_pk):
+def get_payok_payment_url(rub_amount, trx_pk):
+    params = {
+        "amount": rub_amount,
+        "payment": trx_pk,
+        "shop": 9596,
+        "desc": "Пополнение Баланса",
+        "currency": "RUB",
+    }
+    signature = f"{rub_amount}|{trx_pk}|9596|RUB|{params['desc']}|{settings.PAYOK_API_KEY}"
+    signature_encrypted = hashlib.md5(signature.encode('utf-8')).hexdigest()
+    params["sign"] = signature_encrypted
+    return {
+            "link": "https://payok.io/pay?" + urlencode(params)
+        }
+
+
+def get_payment_url(rub_amount, trx_pk, trx_method):
+    if trx_method == Transaction.PAYOK:
+        return get_payok_payment_url(rub_amount, trx_pk)
+    elif trx_method == Transaction.OXA_PAY:
+        return get_oxa_payment_url(rub_amount, trx_pk)
+
+
+def get_oxa_payment_url(rub_amount, transaction_pk):
     url = 'https://api.oxapay.com/merchants/request'
 
     data = {

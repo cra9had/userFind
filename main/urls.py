@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import home, my, BuyFullDataAPIView, TopUpAPIView, OxaPayPaymentAPIView
+from .views import home, my, BuyFullDataAPIView, TopUpAPIView, OxaPayPaymentAPIView, PayOkPaymentAPIView
 
 
 urlpatterns = [
@@ -8,5 +8,6 @@ urlpatterns = [
     path("my/", my),
     path("api/top-up/", TopUpAPIView.as_view()),
     path("api/oxapay/payment/", OxaPayPaymentAPIView.as_view()),
+    path("api/payok/payment/", PayOkPaymentAPIView.as_view()),
     path("api/buy-full-data/", BuyFullDataAPIView.as_view()),
 ]

@@ -3,12 +3,14 @@ from authentication.models import User
 
 
 class Transaction(models.Model):
+    PAYOK = 0
     OXA_PAY = 1
     TRX_TYPES = (
         (0, "Top up"),
         (1, "Buy")
     )
     TOP_UP_METHODS = (
+        (PAYOK, "PayOk"),
         (OXA_PAY, "OxaPay"),
     )
     date_created = models.DateTimeField(auto_now_add=True, verbose_name="Date")
