@@ -29,7 +29,8 @@ def encrypt_search_result(result_json) -> dict:
         "driver_license": -1,
         "possibles_addresses": 1,
         "passport": 1,
-        "insurance": 1
+        "insurance": 1,
+        "car_number": -1
     }
     for key, value in result_json.items():
         if value:
