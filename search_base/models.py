@@ -12,6 +12,7 @@ class Person(models.Model):
     possibles_addresses = models.CharField(max_length=512, verbose_name="Possible addresses", null=True, blank=True)
     passport = models.CharField(max_length=256, verbose_name="Passport", null=True, blank=True)
     insurance = models.CharField(max_length=64, verbose_name="insurance", null=True, blank=True)
+    car_number = models.CharField(max_length=128, verbose_name="Car number", null=True, blank=True)
     telegram_username = models.CharField(max_length=64, verbose_name="Telegram username", null=True, blank=True)
 
     class Meta:
