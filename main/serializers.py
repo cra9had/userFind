@@ -3,6 +3,7 @@ from .models import Transaction
 
 
 OXA_PAY_MIN_TOP_UP_AMOUNT_RUB = 10
+PAYOK_MIN_TOP_UP_AMOUNT_RUB = 100
 
 
 class TopUpSerializer(serializers.Serializer):
@@ -15,6 +16,8 @@ class TopUpSerializer(serializers.Serializer):
     def validate_amount(self, value):
         if self.initial_data.get("top_up_method") == Transaction.OXA_PAY and value < OXA_PAY_MIN_TOP_UP_AMOUNT_RUB:
             raise serializers.ValidationError(f"Мин. сумма {OXA_PAY_MIN_TOP_UP_AMOUNT_RUB}р")
+        if self.initial_data.get("top_up_method") == Transaction.PAYOK and value < PAYOK_MIN_TOP_UP_AMOUNT_RUB:
+            raise serializers.ValidationError(f"Мин. сумма {PAYOK_MIN_TOP_UP_AMOUNT_RUB}р")
         return value
 
     def validate_top_up_method(self, value):
