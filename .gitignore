@@ -5,7 +5,7 @@
 __pycache__
 db.sqlite3
 media
-
+load_dbs
 # Backup files #
 *.bak
 static/admin
