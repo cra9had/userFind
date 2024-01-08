@@ -1,33 +1,33 @@
 from rest_framework import serializers
 from django.contrib.auth import password_validation
 from rest_framework.authtoken.models import Token
-from rest_captcha.serializers import RestCaptchaSerializer
+from drf_recaptcha.fields import ReCaptchaV2Field
 from .models import User
 
 
 class UserDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'balance', 'avatar', 'username']
+        fields = ['id', 'avatar', 'username', 'available_searches']
 
 
-class UserRegisterSerializer(RestCaptchaSerializer):
+class UserRegisterSerializer(serializers.ModelSerializer):
+    recaptcha = ReCaptchaV2Field(
+    )
     username = serializers.CharField(max_length=16, write_only=True)
     password = serializers.CharField(write_only=True)
     password_confirm = serializers.CharField(write_only=True)
     token = serializers.CharField(read_only=True)
-    captcha_key = serializers.CharField(max_length=64, write_only=True)
-    captcha_value = serializers.CharField(max_length=8, trim_whitespace=True, write_only=True)
 
     class Meta:
         model = User
-        fields = ['username', 'password', 'password_confirm', 'token']
+        fields = ['username', 'password', 'password_confirm', 'token', 'recaptcha']
 
     def validate_username(self, value):
         # Check if a user with the same username (case-insensitive) already exists
         existing_users = User.objects.filter(username__iexact=value)
         if existing_users.exists():
-            raise serializers.ValidationError("Username is already taken.")
+            raise serializers.ValidationError("Логин уже занят")
 
         return value
 
@@ -35,12 +35,12 @@ class UserRegisterSerializer(RestCaptchaSerializer):
         try:
             password_validation.validate_password(value)
         except password_validation.ValidationError:
-            raise serializers.ValidationError("Password is too weak")
+            raise serializers.ValidationError("Пароль слишком простой")
         return value
 
     def validate_password_confirm(self, value):
         if self.initial_data['password'] != value:
-            raise serializers.ValidationError("Passwords do not match.")
+            raise serializers.ValidationError("Пароли не совпадают")
         return value
 
     def create(self, validated_data):
@@ -54,7 +54,9 @@ class UserRegisterSerializer(RestCaptchaSerializer):
         return serializer_data
 
 
-class UserLoginSerializer(RestCaptchaSerializer):
+class UserLoginSerializer(serializers.Serializer):
+    recaptcha = ReCaptchaV2Field(
+    )
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
 
@@ -77,11 +79,11 @@ class UserPasswordChangeSerializer(serializers.Serializer):
     def validate_old_password(self, value):
         user = self.context.get("user")
         if not user.check_password(value):
-            raise serializers.ValidationError("Old password is incorrect")
+            raise serializers.ValidationError("Неверный пароль")
 
     def validate_new_password(self, value):
         try:
             password_validation.validate_password(value)
         except password_validation.ValidationError:
-            raise serializers.ValidationError("Password is too weak")
+            raise serializers.ValidationError("Слишком простой пароль")
         return value

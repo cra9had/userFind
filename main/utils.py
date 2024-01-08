@@ -69,21 +69,26 @@ def get_oxa_payment_url(rub_amount, transaction_pk):
         }
 
 
-def buy_full_data(user: User, search: SearchHistory):
+def add_searches_to_user(trx):
+    tariff = next((item for item in settings.SEARCH_TARIFFS if item.get("price") == trx.amount), None)
     with transaction.atomic():
-        trx = Transaction.objects.create(
-            user=user,
-            amount=settings.FULLDATA_PRICE_RUB,
-            trx_type=1,
-            is_done=True
-        )
         Order.objects.create(
             transaction=trx,
-            user=user,
-            order_product=0
+            user=trx.user,
+            order_product=tariff.get("id")
         )
+        trx.is_done = True
+        trx.user.available_searches += tariff.get("searches_amount")
+        trx.save()
+        trx.user.save()
+
+
+def buy_full_data(user: User, search: SearchHistory):
+    with transaction.atomic():
+        user.available_searches -= 1
         search.paid = True
         person = Person.objects.get(pk=search.search_result_pk)
         cache.set(f"search_{search.pk}", json.dumps(person.get_json()))
         search.save()
+        user.save()
         return person.get_json()

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_captcha',
+    'drf_recaptcha',
     'celery',
     'corsheaders',
 
@@ -94,7 +94,9 @@ DATABASES = {
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
-    ]
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
 }
 
 REST_AUTH = {
@@ -102,9 +104,7 @@ REST_AUTH = {
     'JWT_AUTH_COOKIE': 'jwt-auth',
 }
 
-REST_CAPTCHA = {
-    'CAPTCHA_LENGTH': 4,
-}
+DRF_RECAPTCHA_SECRET_KEY = "6Lc170QpAAAAALu2eCer8AcsZLdUAsx0aXVYvnsI"
 
 CACHES = {
     "default": {
@@ -114,7 +114,29 @@ CACHES = {
     }
 }
 
-FULLDATA_PRICE_RUB = 59
+# TARIFF_ID: (PRICE RUB, SEARCH AMOUNT)
+SEARCH_TARIFFS = [
+    {
+        "id": 0,
+        "price": 99,
+        "searches_amount": 3
+    },
+    {
+        "id": 1,
+        "price": 239,
+        "searches_amount": 10
+    },
+    {
+        "id": 2,
+        "price": 549,
+        "searches_amount": 50
+    },
+    {
+        "id": 3,
+        "price": 899,
+        "searches_amount": 100
+    },
+]
 
 AUTH_PASSWORD_VALIDATORS = [
     {

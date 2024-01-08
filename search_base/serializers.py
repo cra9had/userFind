@@ -6,7 +6,7 @@ from .models import SearchHistory, Person
 from .tasks import search_person
 
 
-class SearchSerializer(serializers.ModelSerializer):
+class SearchCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = SearchHistory
         fields = ["pk", "search_type", "search_query"]
@@ -52,3 +52,10 @@ class SearchSerializer(serializers.ModelSerializer):
         )
         search_person.delay(search_history.pk)
         return search_history
+
+
+class SearchSerializer(serializers.ModelSerializer):
+    date_created = serializers.DateTimeField(format="%d.%m.%Y")
+    class Meta:
+        model = SearchHistory
+        fields = "__all__"

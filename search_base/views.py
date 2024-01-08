@@ -1,19 +1,22 @@
 import json
 
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from .serializers import SearchSerializer
+from .serializers import SearchCreateSerializer, SearchSerializer
 from .models import SearchHistory
 from django.core.cache import cache
+
+from .utils import update_search_cache
 
 
 class SearchAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        serializer = SearchSerializer(data=request.data, context={"user": request.user})
+        serializer = SearchCreateSerializer(data=request.data, context={"user": request.user})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -40,5 +43,15 @@ class SearchResultAPIView(APIView):
                             status=status.HTTP_200_OK)
         elif search.status == 2:
             dumped_json = cache.get(f"search_{search.pk}")
+            if not dumped_json:
+                dumped_json = update_search_cache(search_pk)
             return Response({"status": 200, "result": {**json.loads(dumped_json)}}, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class SearchHistoryAPIView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = SearchSerializer
+
+    def get_queryset(self):
+        return SearchHistory.objects.filter(user=self.request.user).order_by("-date_created")

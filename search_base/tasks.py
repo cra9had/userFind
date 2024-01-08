@@ -23,7 +23,7 @@ def search_person(search_pk: int):
             search.save()
             return
     elif search.search_type == 1:
-        target_date = datetime.strptime(search.search_query["birthday"], "%Y-%m-%d").date()
+        target_date = datetime.strptime(search.search_query["birthday"], "%d.%m.%Y").date()
         person = Person.objects.filter(
             fullname__iexact=search.search_query["fullname"],
             birthday=target_date

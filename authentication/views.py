@@ -12,7 +12,7 @@ from .serializers import (UserRegisterSerializer, UserLoginSerializer, UserDetai
 
 class UserRegistrationView(APIView):
     def post(self, request):
-        serializer = UserRegisterSerializer(data=request.data)
+        serializer = UserRegisterSerializer(data=request.data, context={"request": request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -21,14 +21,14 @@ class UserRegistrationView(APIView):
 
 class UserLoginView(APIView):
     def post(self, request):
-        serializer = UserLoginSerializer(data=request.data)
+        serializer = UserLoginSerializer(data=request.data, context={"request": request})
         if serializer.is_valid():
             try:
                 user = User.objects.get(username=serializer.validated_data['username'])
             except User.DoesNotExist:
-                return Response({'password': 'Пользователя не существует'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'error': 'Пользователя не существует'}, status=status.HTTP_400_BAD_REQUEST)
             if not user.check_password(serializer.validated_data['password']):
-                return Response({'password': 'Пользователя не существует'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'error': 'Пользователя не существует'}, status=status.HTTP_400_BAD_REQUEST)
             token, created = Token.objects.get_or_create(user=user)
             return Response({'token': token.key}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -20,22 +20,6 @@ class Transaction(models.Model):
     amount = models.IntegerField(verbose_name="Amount", help_text="RUB")
     is_done = models.BooleanField(verbose_name="Is done", default=False)
 
-    def save(self, *args, **kwargs):
-        if self.pk:     # Model updated
-            return super(Transaction, self).save(*args, **kwargs)
-        if self.trx_type == 1 and self.is_done:
-            assert self.user.balance >= self.amount
-            self.user.balance -= self.amount
-        self.user.save()
-        super(Transaction, self).save(*args, **kwargs)
-
-    def confirm_top_up(self):
-        assert not(self.is_done or self.trx_type != 0)
-        self.user.balance += self.amount
-        self.is_done = True
-        self.user.save()
-        self.save()
-
     def __str__(self):
         prefix = "?" if not self.is_done else ""
         return f"{prefix}Transaction {self.amount} RUB "
@@ -43,7 +27,10 @@ class Transaction(models.Model):
 
 class Order(models.Model):
     ORDER_PRODUCTS = (
-        (0, "Full data"),
+        (0, "3 searches"),
+        (1, "10 searches"),
+        (2, "50 searches"),
+        (3, "100 searches"),
     )
     date_created = models.DateField(auto_now_add=True, verbose_name="Date")
     transaction = models.ForeignKey(Transaction, on_delete=models.PROTECT,

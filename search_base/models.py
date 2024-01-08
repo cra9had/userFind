@@ -25,6 +25,9 @@ class Person(models.Model):
         person_json.pop("id", None)
         if person_json["birthday"]:
             person_json["birthday"] = person_json["birthday"].strftime("%d.%m.%Y")
+        if self.phone_number:
+            person_json["telegram"] = "https://t.me/%2B" + person_json["phone_number"]
+            person_json["whatsapp"] = "https://api.whatsapp.com/send?phone=" + person_json["phone_number"]
         return person_json
 
     def __str__(self):

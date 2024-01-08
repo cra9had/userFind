@@ -19,7 +19,7 @@ import csv
 from loguru import logger
 
 
-file_path = 'gemotest.csv'
+file_path = 'esia.csv'
 
 BATCH_SIZE = 5000  # Adjust as needed
 CSV_SIZE = 14067134
