@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.shortcuts import render
+from authentication.models import User
 from .serializers import BuySearchesSerializer
 from search_base.models import SearchHistory
 from django.conf import settings
@@ -100,3 +100,14 @@ class BuyFullDataAPIView(APIView):
             return Response({"error": "Данные уже куплены!"}, status=status.HTTP_400_BAD_REQUEST)
         full_data = buy_full_data(self.request.user, search)
         return Response({"available_searches": self.request.user.available_searches, "result": full_data}, status=status.HTTP_200_OK)
+
+
+class GetBonusAPIView(APIView):
+    def get(self, request, telegram_id):
+        if self.request.user.telegram_id or User.objects.filter(telegram_id=telegram_id).exists() or self.request.user.bonus_used:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        self.request.user.telegram_id = telegram_id
+        self.request.user.bonus_used = True
+        self.request.user.available_searches += 1
+        self.request.user.save()
+        return Response(status=status.HTTP_200_OK)
