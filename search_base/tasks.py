@@ -14,7 +14,7 @@ def search_person(search_pk: int):
     if search.search_type == 0:
         try:
             person = Person.objects.get(
-                phone_number__contains=search.search_query["phone_number"][1:]
+                phone_number=search.search_query["phone_number"]
             )
         except Person.MultipleObjectsReturned:
             person = Person.objects.filter(phone_number__contains=search.search_query["phone_number"][1:]).first()
@@ -25,7 +25,7 @@ def search_person(search_pk: int):
     elif search.search_type == 1:
         target_date = datetime.strptime(search.search_query["birthday"], "%d.%m.%Y").date()
         person = Person.objects.filter(
-            fullname__iexact=search.search_query["fullname"],
+            fullname=search.search_query["fullname"],
             birthday=target_date
         )
         if not person:
