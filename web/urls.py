@@ -24,7 +24,7 @@ urlpatterns = [
     path('api/auth/', include('authentication.urls')),
     path('api/', include('search_base.urls')),
     path(r'api/captcha/', include('rest_captcha.urls')),
-    path('admin/', admin.site.urls),
+    path('sSGJAO0SpSRrG4UaGjqeuSR5pb4jpqUb/', admin.site.urls),
 ]
 
 if settings.DEBUG:
